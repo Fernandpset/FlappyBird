@@ -1,0 +1,16 @@
+{
+  "background_color": "#444444",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "fernandpset.github",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Flappy",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "lang": "en",
+  "id": "githvb.fernandpset",
+  "categories": [
+    "games"
+  ]
+}
