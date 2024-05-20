@@ -17,14 +17,14 @@
   "background_color": "#444444",
   "dir": "ltr",
   "display": "standalone",
-  "name": "fernandpset.github",
+  "name": "Flappy Bird",
   "orientation": "any",
   "scope": "/",
-  "short_name": "Flappy",
+  "short_name": "Flappy Bird",
   "start_url": "/index.html",
   "theme_color": "#ffffff",
   "lang": "en",
-  "id": "githvb.fernandpset",
+  "id": "flappybird.fernandpset",
   "categories": [
     "games"
   ]
