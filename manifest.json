@@ -1,13 +1,13 @@
 {
   "icons": [
     {
-        "src": "https://fernandpset.github.io/Flappy_Bird_TP1/bird-emoji-256x221-p5t7gmob.png",
+        "src": "https://fernandpset.github.io/FlappyBird/bird-emoji-256x221-p5t7gmob.png",
         "sizes": "192x192",
         "type": "image/png",
         "purpose": "any"
     },
     {
-        "src": "https://fernandpset.github.io/Flappy_Bird_TP1/bird-emoji-256x221-p5t7gmob.png",
+        "src": "https://fernandpset.github.io/FlappyBird/bird-emoji-256x221-p5t7gmob.png",
         "sizes": "512x512",
         "type": "image/png",
         "purpose": "maskable"
