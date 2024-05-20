@@ -46,6 +46,10 @@
     </div>
     <script>
         
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+        }
+
         var rankingData = [
             { posicion: 1, nombre: "Juan", puntuacion: 1000 },
             { posicion: 2, nombre: "María", puntuacion: 950 },
@@ -67,10 +71,8 @@
         }
         cargarRanking();
         
-        //Service worker
-        if (typeof navigator.serviceWorker !== 'undefined') {
-        navigator.serviceWorker.register('sw.js')
-        }
+
+        
     </script>    
 
 </body>
