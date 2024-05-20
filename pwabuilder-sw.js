@@ -1,6 +1,6 @@
 // This is the "Offline page" service worker
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+importScripts('https://fernandpset.github.io/Flappy_Bird_TP1/');
 
 const CACHE = "pwabuilder-page";
 
