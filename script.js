@@ -88,7 +88,7 @@ const render = () => {
         }
         // Convertir datos a JSON si es necesario
           var datosJSON = JSON.stringify(datos);
-          ws.send(datosJSON);
+          //ws.send(datosJSON);
       }
     
       // if hit the pipe, end
