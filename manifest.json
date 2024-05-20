@@ -21,7 +21,7 @@
   "orientation": "any",
   "scope": "/",
   "short_name": "Flappy Bird",
-  "start_url": "/index.html",
+  "start_url": "/FlappyBird/index.html",
   "theme_color": "#ffffff",
   "lang": "en",
   "id": "flappybird.fernandpset",
