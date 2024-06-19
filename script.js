@@ -118,7 +118,7 @@ function handleOrientation(event) {
   
   if (lastBeta !== null) {
     const delta = beta - lastBeta;
-    if (delta > 15) { // Adjust the sensitivity threshold as needed
+    if (delta > 0.1) { // Adjust the sensitivity threshold as needed
       flight = jump;
     }
   }
