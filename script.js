@@ -156,11 +156,11 @@ ws.onclose = function(event) {
 // Gyroscope control
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
-    const { beta } = event; // beta represents the front-to-back tilt in degrees
+    var beta = event.beta; // beta represents the front-to-back tilt in degrees
     if (gamePlaying) {
       flight = beta * 0.2; // Adjust sensitivity as needed
     }
-  });
-} else {
-  console.log('DeviceOrientationEvent is not supported');
+    event
+    
+  })
 }
