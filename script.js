@@ -93,6 +93,7 @@ const render = () => {
       ].every(elem => elem)) {
         gamePlaying = false;
         setup();
+        vibrateDevice()
       }
     })
   }
@@ -163,4 +164,11 @@ if (window.DeviceOrientationEvent) {
     event
     
   })
+}
+function vibrateDevice() {
+  if ("vibrate" in navigator) {
+    navigator.vibrate(200); // Vibrate for 200 milliseconds
+  } else {
+    console.log("Vibration API is not supported in this browser.");
+  }
 }
