@@ -158,17 +158,15 @@ ws.onclose = function(event) {
     console.log('Conexión WebSocket cerrada:', event);
 };
 
-// Gyroscope control
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
-    const beta = event.beta; // beta represents the front-to-back tilt in degrees
+    const beta = event.beta; // Verifica que beta tenga valores esperados
     if (gamePlaying) {
-      flight = beta * 0.2; // Adjust sensitivity as needed
+      flight = beta * 0.2; // Ajusta la sensibilidad según sea necesario
     }
-    event.beta
-    
-  })
+  });
 }
+
 function vibrateDevice() {
   if ("vibrate" in navigator) {
     navigator.vibrate(200); // Vibrate for 200 milliseconds
