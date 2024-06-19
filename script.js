@@ -94,23 +94,35 @@ const render = () => {
 setup();
 img.onload = render;
 
+// Request permission for iOS 13+ devices
+function requestSensorPermission() {
+  if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener('deviceorientation', handleOrientation);
+        }
+      })
+      .catch(console.error);
+  } else {
+    // Handle regular non iOS 13+ devices
+    window.addEventListener('deviceorientation', handleOrientation);
+  }
+}
+
 // Gyroscope control
 let lastBeta = null;
-if (window.DeviceOrientationEvent) {
-  window.addEventListener('deviceorientation', (event) => {
-    const { beta } = event; // beta represents the front-to-back tilt in degrees
-    if (!gamePlaying) return;
-    
-    if (lastBeta !== null) {
-      const delta = beta - lastBeta;
-      if (delta > 0.2) { // Adjust the sensitivity threshold as needed
-        flight = jump;
-      }
+function handleOrientation(event) {
+  const { beta } = event; // beta represents the front-to-back tilt in degrees
+  if (!gamePlaying) return;
+  
+  if (lastBeta !== null) {
+    const delta = beta - lastBeta;
+    if (delta > 15) { // Adjust the sensitivity threshold as needed
+      flight = jump;
     }
-    lastBeta = beta;
-  });
-} else {
-  console.log('DeviceOrientationEvent is not supported');
+  }
+  lastBeta = beta;
 }
 
 // Function to vibrate the device
