@@ -4,7 +4,7 @@ const img = new Image();
 img.src = "https://i.ibb.co/Q9yv5Jk/flappy-bird-set.png";
 
 // General settings
-let gamePlaying = true;
+let gamePlaying = false;
 const gravity = 0.5;
 const speed = 6.2;
 const size = [51, 36];
@@ -79,7 +79,7 @@ const render = () => {
     flyHeight = (canvas.height / 2) - (size[1] / 2);
     // Text accueil
     ctx.fillText(`Best score : ${bestScore}`, 85, 245);
-    ctx.fillText('Touch to play', 90, 535);
+    ctx.fillText('Tilt to play', 90, 535);
     ctx.font = "bold 30px courier";
   }
 
@@ -95,12 +95,19 @@ setup();
 img.onload = render;
 
 // Gyroscope control
+let lastBeta = null;
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
     const { beta } = event; // beta represents the front-to-back tilt in degrees
-    if (gamePlaying) {
-      flight = beta * 1; // Adjust sensitivity as needed
+    if (!gamePlaying) return;
+    
+    if (lastBeta !== null) {
+      const delta = beta - lastBeta;
+      if (delta > 15) { // Adjust the sensitivity threshold as needed
+        flight = jump;
+      }
     }
+    lastBeta = beta;
   });
 } else {
   console.log('DeviceOrientationEvent is not supported');
