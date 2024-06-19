@@ -94,6 +94,10 @@ const render = () => {
         gamePlaying = false;
         setup();
         vibrateDevice()
+        
+        if (currentScore <= 10) {
+          showNotification("¡Perdiste!");
+        }
       }
     })
   }
@@ -157,11 +161,11 @@ ws.onclose = function(event) {
 // Gyroscope control
 if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
-    var beta = event.beta; // beta represents the front-to-back tilt in degrees
+    const beta = event.beta; // beta represents the front-to-back tilt in degrees
     if (gamePlaying) {
       flight = beta * 0.2; // Adjust sensitivity as needed
     }
-    event
+    event.beta
     
   })
 }
@@ -170,5 +174,17 @@ function vibrateDevice() {
     navigator.vibrate(200); // Vibrate for 200 milliseconds
   } else {
     console.log("Vibration API is not supported in this browser.");
+  }
+}
+function showNotification(message) {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        var notification = new Notification('Game Over', {
+          body: message,
+          icon: 'https://example.com/icon.png' // Replace with your game's icon URL
+        });
+      }
+    });
   }
 }
