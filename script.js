@@ -188,3 +188,22 @@ function showNotification(message) {
     });
   }
 }
+function showNotification(message) {
+  if ('Notification' in window) {
+    if (Notification.permission === 'granted') {
+      var notification = new Notification('Game Over', {
+        body: message,
+        icon: 'https://github.com/Fernandpset/FlappyBird/blob/main/bird-emoji-256x221-p5t7gmob.png' 
+      });
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(function(permission) {
+        if (permission === 'granted') {
+          var notification = new Notification('Game Over', {
+            body: message,
+            icon: 'https://github.com/Fernandpset/FlappyBird/blob/main/bird-emoji-256x221-p5t7gmob.png' 
+          });
+        }
+      });
+    }
+  }
+}
