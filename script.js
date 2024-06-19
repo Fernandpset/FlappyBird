@@ -95,7 +95,7 @@ const render = () => {
         setup();
         vibrateDevice()
         
-        if (currentScore >= 10) {
+        if (currentScore >= 1) {
           showNotification("¡Perdiste!");
         }
       }
@@ -182,7 +182,7 @@ function showNotification(message) {
       if (permission === 'granted') {
         var notification = new Notification('Game Over', {
           body: message,
-          icon: 'https://example.com/icon.png' // Replace with your game's icon URL
+          icon: 'https://github.com/Fernandpset/FlappyBird/blob/main/bird-emoji-256x221-p5t7gmob.png' // Replace with your game's icon URL
         });
       }
     });
