@@ -8,15 +8,14 @@ let gamePlaying = false;
 const gravity = .5;
 const speed = 6.2;
 const size = [51, 36];
-const jump = -11.5;
 const cTenth = (canvas.width / 10);
 
 let index = 0,
     bestScore = 0, 
-    flight, 
+    flight = 0, 
     flyHeight, 
     currentScore, 
-    pipe;
+    pipes;
 
 // pipe settings
 const pipeWidth = 78;
@@ -25,7 +24,7 @@ const pipeLoc = () => (Math.random() * ((canvas.height - (pipeGap + pipeWidth)) 
 
 const setup = () => {
   currentScore = 0;
-  flight = jump;
+  flight = 0;
 
   // set initial flyHeight (middle of screen - size of the bird)
   flyHeight = (canvas.height / 2) - (size[1] / 2);
@@ -68,7 +67,7 @@ const render = () => {
         pipes = [...pipes.slice(1), [pipes[pipes.length-1][0] + pipeGap + pipeWidth, pipeLoc()]];
         console.log(pipes);
 
-        //otro localStorage
+        // otro localStorage
         localStorage.setItem('currentScore', currentScore);
         console.log('La cantidad de caños que pasaste antes fue ', localStorage.getItem('currentScore'));
         const nombreusuario = localStorage.getItem("username");
@@ -82,7 +81,7 @@ const render = () => {
         }
         // Convertir datos a JSON si es necesario
         var datosJSON = JSON.stringify(datos);
-        //ws.send(datosJSON);
+        // ws.send(datosJSON);
       }
 
       // if hit the pipe, end
@@ -93,6 +92,7 @@ const render = () => {
       ].every(elem => elem)) {
         gamePlaying = false;
         setup();
+        vibrateDevice();
       }
     })
   }
@@ -106,7 +106,7 @@ const render = () => {
     flyHeight = (canvas.height / 2) - (size[1] / 2);
     // text accueil
     ctx.fillText(`Best score : ${bestScore}`, 85, 245);
-    ctx.fillText('Click to play', 90, 535);
+    ctx.fillText('Tilt to play', 90, 535);
     ctx.font = "bold 30px courier";
   }
 
@@ -121,10 +121,14 @@ const render = () => {
 setup();
 img.onload = render;
 
-// start game
-document.addEventListener('click', () => gamePlaying = true);
-window.onclick = () => flight = jump;
+// start game on tilt
+window.addEventListener('deviceorientation', (event) => {
+  if (!gamePlaying) {
+    gamePlaying = true;
+  }
+});
 
+// Function to save the username
 function save(){
   const content = document.getElementById("username").value;
   localStorage.setItem("username", content);
@@ -158,9 +162,19 @@ if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
     const { beta } = event; // beta represents the front-to-back tilt in degrees
     if (gamePlaying) {
-      flight = beta * 1; // Adjust sensitivity as needed
+      // Use the gyroscope to control flight
+      flight = (beta - 90) * -0.1; // Adjust sensitivity as needed
     }
   });
 } else {
   console.log('DeviceOrientationEvent is not supported');
+}
+
+// Function to vibrate the device
+function vibrateDevice() {
+  if ("vibrate" in navigator) {
+    navigator.vibrate(200); // Vibrate for 200 milliseconds
+  } else {
+    console.log("Vibration API is not supported in this browser.");
+  }
 }
