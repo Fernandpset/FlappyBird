@@ -99,7 +99,7 @@ if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', (event) => {
     const { beta } = event; // beta represents the front-to-back tilt in degrees
     if (gamePlaying) {
-      flight = beta * 0.2; // Adjust sensitivity as needed
+      flight = beta * 1; // Adjust sensitivity as needed
     }
   });
 } else {
