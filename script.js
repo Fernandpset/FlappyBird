@@ -95,7 +95,7 @@ const render = () => {
         setup();
         vibrateDevice()
         
-        if (currentScore <= 10) {
+        if (currentScore >= 10) {
           showNotification("¡Perdiste!");
         }
       }
